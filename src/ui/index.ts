@@ -13,3 +13,4 @@ export { Select } from "./primitives/Select/Select";
 export { Textarea } from "./primitives/Textarea/Textarea";
 export { PageHeader } from "./patterns/PageHeader/PageHeader";
 export { DataTable } from "./patterns/DataTable/DataTable";
+export { Sidebar } from "./patterns/Sidebar/Sidebar";

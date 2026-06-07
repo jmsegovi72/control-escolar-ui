@@ -17,6 +17,7 @@ import {
   RadioGroup,
   SearchSelect,
   Select,
+  Sidebar,
   Textarea,
 } from "~/ui";
 
@@ -65,9 +66,9 @@ export default component$(() => {
 
         <PageHeader
           eyebrow="Revision actual"
-          title="ChoiceGroup"
-          description="Seleccion unica moderna en formato de tira o tarjetas seleccionables."
-          meta="Primitive"
+          title="Sidebar"
+          description="Navegacion principal configurable con marca, reloj, avatar, secciones y acciones inferiores."
+          meta="Pattern"
         >
           <Button q:slot="actions" iconLeft="add">
             Nuevo alumno
@@ -76,6 +77,106 @@ export default component$(() => {
             Filtros
           </Button>
         </PageHeader>
+
+        <Panel eyebrow="Revision actual" title="Sidebar: navegacion de producto">
+          <div class="showcase-grid">
+            <Sidebar
+              brand={{
+                name: "Control Escolar",
+                shortName: "CE",
+                subtitle: "Instituto Central",
+              }}
+              activeItem="students"
+              clock={{
+                label: "Turno matutino",
+                time: "08:45",
+                date: "Lunes 7 de junio",
+              }}
+              user={{
+                name: "Mac Segovia",
+                role: "Administrador",
+                status: "Sesion activa",
+              }}
+              sections={[
+                {
+                  id: "main",
+                  label: "Operacion escolar",
+                  items: [
+                    { id: "dashboard", label: "Inicio", icon: "dashboard" },
+                    {
+                      id: "students",
+                      label: "Alumnos",
+                      icon: "student",
+                      badge: 12,
+                      children: [
+                        {
+                          id: "admission",
+                          label: "Admision",
+                          icon: "add",
+                        },
+                        {
+                          id: "groups",
+                          label: "Grupos",
+                          icon: "group",
+                        },
+                      ],
+                    },
+                    { id: "teachers", label: "Docentes", icon: "teacher" },
+                    { id: "classes", label: "Clases", icon: "class" },
+                  ],
+                },
+                {
+                  id: "admin",
+                  label: "Administracion",
+                  items: [
+                    { id: "schedule", label: "Ciclos escolares", icon: "schedule" },
+                    { id: "users", label: "Usuarios", icon: "user-settings" },
+                    { id: "reports", label: "Reportes", icon: "download" },
+                  ],
+                },
+              ]}
+              footerItems={[
+                { id: "settings", label: "Configuracion", icon: "settings" },
+                { id: "logout", label: "Cerrar sesion", icon: "logout" },
+              ]}
+            />
+
+            <Sidebar
+              collapsed
+              brand={{
+                name: "Control Escolar",
+                shortName: "CE",
+                subtitle: "Instituto Central",
+              }}
+              activeItem="students"
+              clock={{
+                label: "Turno matutino",
+                time: "08:45",
+                date: "Lunes 7 de junio",
+              }}
+              user={{
+                name: "Mac Segovia",
+                role: "Administrador",
+              }}
+              sections={[
+                {
+                  id: "compact-main",
+                  items: [
+                    { id: "dashboard", label: "Inicio", icon: "dashboard" },
+                    { id: "students", label: "Alumnos", icon: "student", badge: 12 },
+                    { id: "teachers", label: "Docentes", icon: "teacher" },
+                    { id: "classes", label: "Clases", icon: "class" },
+                    { id: "users", label: "Usuarios", icon: "user-settings" },
+                  ],
+                },
+              ]}
+              footerItems={[
+                { id: "settings", label: "Configuracion", icon: "settings" },
+                { id: "logout", label: "Cerrar sesion", icon: "logout" },
+              ]}
+            />
+          </div>
+        </Panel>
 
         <Panel eyebrow="Revision actual" title="ChoiceGroup: tira de opciones">
           <div class="stack">
