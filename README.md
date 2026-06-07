@@ -41,6 +41,14 @@ La galeria visual vive en:
 http://127.0.0.1:5174/ui/
 ```
 
+La demo de pantalla completa vive en:
+
+```txt
+http://127.0.0.1:5174/ui-dashboard/
+```
+
+`/ui` sirve para revisar componentes aislados. `/ui-dashboard` sirve para comprobar si las piezas juntas ya se sienten como una pantalla real de Control Escolar.
+
 El servidor de desarrollo usa el puerto `5174`.
 
 ## Validacion

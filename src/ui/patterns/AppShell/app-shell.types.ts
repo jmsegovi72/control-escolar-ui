@@ -1,3 +1,5 @@
+import type { QRL } from "@builder.io/qwik";
+
 export type AppShellDensity = "comfortable" | "compact";
 
 export type AppShellProps = {
@@ -6,4 +8,7 @@ export type AppShellProps = {
   description?: string;
   meta?: string;
   density?: AppShellDensity;
+  sidebarOpen?: boolean;
+  sidebarToggleLabel?: string;
+  onToggleSidebar$?: QRL<() => void>;
 };

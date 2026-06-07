@@ -42,6 +42,68 @@ Si la app real necesita una pantalla de alumnos:
 3. Lo probamos en `/ui`.
 4. Luego lo conectamos en la app real con datos y servicios.
 
+## Pantallas Completas
+
+`Sidebar` y `AppShell` son patrones de producto. No son la app real, pero si definen la estructura visual que la app real va a usar.
+
+### Sidebar
+
+El `Sidebar` representa navegacion, usuario y estado operativo.
+
+La app real decide:
+
+- que modulo esta activo,
+- que grupos estan abiertos,
+- que rutas existen,
+- que permisos tiene el usuario,
+- cuanto tiempo queda de sesion,
+- si API, base de datos o procesos por lote estan activos.
+
+El componente solo recibe props y pinta ese estado:
+
+- `brand`,
+- `sections`,
+- `activeItem`,
+- `openItems`,
+- `collapsed`,
+- `clock`,
+- `systemStatus`,
+- `user`,
+- `footerItems`,
+- `onNavigate$`,
+- `onToggleItem$`,
+- `onToggleCollapse$`.
+
+### AppShell
+
+El `AppShell` arma la pantalla principal:
+
+- sidebar,
+- encabezado,
+- acciones,
+- toolbar,
+- contenido con scroll.
+
+Tambien acepta control de sidebar tipo drawer para pantallas pequenas:
+
+- `sidebarOpen`,
+- `sidebarToggleLabel`,
+- `onToggleSidebar$`.
+
+La app real conserva el estado. El componente no guarda rutas, permisos ni datos de negocio.
+
+### Demo De Producto
+
+`/ui-dashboard` no es un componente para importar. Es una pantalla de prueba donde revisamos si los componentes ya funcionan juntos como producto real.
+
+Se usa para validar:
+
+- densidad visual,
+- consistencia entre sidebar, toolbar, tablas y tarjetas,
+- comportamiento responsive,
+- flujo de acciones frecuentes,
+- claridad de estados operativos.
+
 ## Commits
 
 No hacemos commit por cada ajuste pequeno.

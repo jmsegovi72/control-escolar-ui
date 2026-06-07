@@ -150,6 +150,251 @@ export default component$(() => {
 
         <PageHeader
           eyebrow="Revision actual"
+          title="Sidebar"
+          description="Navegacion principal configurable, con submenus controlables, semaforos de sistema, reloj, usuario y modo colapsado."
+          meta="Pattern"
+        >
+          <Button q:slot="actions" iconLeft="view">
+            Ver demo completa
+          </Button>
+        </PageHeader>
+
+        <Panel eyebrow="Revision actual" title="Sidebar profesional">
+          <div class="showcase-grid">
+            <Sidebar
+              brand={{
+                name: "Control Escolar",
+                shortName: "CE",
+                subtitle: "Operacion diaria",
+              }}
+              activeItem="students-list"
+              openItems={["students"]}
+              clock={{
+                label: "Hora local",
+                time: "09:48",
+                date: "Domingo 07 Jun",
+              }}
+              systemStatus={{
+                items: [
+                  { id: "api", label: "API", value: "Activa", tone: "online" },
+                  { id: "db", label: "BD", value: "36 ms", tone: "online" },
+                  {
+                    id: "jobs",
+                    label: "Lotes",
+                    value: "2 pendientes",
+                    tone: "warning",
+                  },
+                ],
+                session: {
+                  label: "Sesion",
+                  remaining: "14:32",
+                  tone: "warning",
+                },
+              }}
+              sections={[
+                {
+                  id: "operation",
+                  label: "Operacion",
+                  items: [
+                    { id: "dashboard", label: "Dashboard", icon: "dashboard" },
+                    {
+                      id: "students",
+                      label: "Alumnos",
+                      icon: "student",
+                      badge: 42,
+                      children: [
+                        { id: "students-list", label: "Listado", icon: "group" },
+                        { id: "students-new", label: "Nuevo alumno", icon: "add" },
+                        { id: "students-import", label: "Carga CSV", icon: "upload" },
+                      ],
+                    },
+                    { id: "teachers", label: "Docentes", icon: "teacher" },
+                    { id: "groups", label: "Grupos", icon: "class" },
+                  ],
+                },
+                {
+                  id: "admin",
+                  label: "Administracion",
+                  items: [
+                    { id: "users", label: "Usuarios", icon: "user-settings" },
+                    { id: "reports", label: "Reportes", icon: "download" },
+                  ],
+                },
+              ]}
+              footerItems={[
+                { id: "settings", label: "Configuracion", icon: "settings" },
+                { id: "logout", label: "Cerrar sesion", icon: "logout" },
+              ]}
+              user={{
+                name: "Mac Segovia",
+                role: "Administrador",
+                initials: "MS",
+                status: "Sesion protegida",
+              }}
+            />
+
+            <Sidebar
+              brand={{
+                name: "Control Escolar",
+                shortName: "CE",
+                subtitle: "Submenus controlados",
+              }}
+              activeItem="dashboard"
+              openItems={["settings"]}
+              sections={[
+                {
+                  id: "closed",
+                  label: "Control externo",
+                  items: [
+                    { id: "dashboard", label: "Dashboard", icon: "dashboard" },
+                    {
+                      id: "students",
+                      label: "Alumnos cerrado",
+                      icon: "student",
+                      badge: 12,
+                      children: [
+                        { id: "students-list", label: "Listado", icon: "group" },
+                        { id: "students-new", label: "Nuevo alumno", icon: "add" },
+                      ],
+                    },
+                    {
+                      id: "settings",
+                      label: "Configuracion abierta",
+                      icon: "settings",
+                      open: true,
+                      children: [
+                        { id: "users", label: "Usuarios", icon: "user-settings" },
+                        { id: "security", label: "Seguridad", icon: "lock" },
+                      ],
+                    },
+                  ],
+                },
+              ]}
+              user={{
+                name: "Captura escolar",
+                role: "Mesa de control",
+                initials: "CE",
+              }}
+            />
+
+            <Sidebar
+              collapsed
+              brand={{
+                name: "Control Escolar",
+                shortName: "CE",
+              }}
+              activeItem="students"
+              clock={{
+                time: "09:48",
+                date: "Domingo 07 Jun",
+              }}
+              systemStatus={{
+                items: [
+                  { id: "api", label: "API", value: "Activa", tone: "online" },
+                  { id: "db", label: "BD", value: "36 ms", tone: "online" },
+                ],
+                session: {
+                  remaining: "14:32",
+                  tone: "warning",
+                },
+              }}
+              sections={[
+                {
+                  id: "compact",
+                  items: [
+                    { id: "dashboard", label: "Dashboard", icon: "dashboard" },
+                    { id: "students", label: "Alumnos", icon: "student" },
+                    { id: "teachers", label: "Docentes", icon: "teacher" },
+                    { id: "settings", label: "Configuracion", icon: "settings" },
+                  ],
+                },
+              ]}
+              user={{
+                name: "Mac Segovia",
+                initials: "MS",
+              }}
+            />
+          </div>
+        </Panel>
+
+        <PageHeader
+          eyebrow="Revision actual"
+          title="AppShell"
+          description="Marco principal para pantallas de producto: sidebar, encabezado, acciones, toolbar y contenido scrollable."
+          meta="Pattern"
+        />
+
+        <AppShell
+          eyebrow="Modulo escolar"
+          title="Alumnos"
+          description="Estructura de pantalla lista para conectar con rutas reales."
+          meta="Ciclo 2026"
+          density="compact"
+          sidebarOpen={false}
+        >
+          <Sidebar
+            q:slot="sidebar"
+            brand={{
+              name: "Control Escolar",
+              shortName: "CE",
+            }}
+            activeItem="students"
+            sections={[
+              {
+                id: "demo",
+                items: [
+                  { id: "dashboard", label: "Dashboard", icon: "dashboard" },
+                  { id: "students", label: "Alumnos", icon: "student" },
+                  { id: "teachers", label: "Docentes", icon: "teacher" },
+                ],
+              },
+            ]}
+            user={{
+              name: "Mac Segovia",
+              initials: "MS",
+            }}
+          />
+          <Button q:slot="actions" size="sm" iconLeft="add">
+            Nuevo alumno
+          </Button>
+          <Toolbar q:slot="toolbar" density="compact">
+            <Input
+              q:slot="leading"
+              variant="quiet"
+              size="sm"
+              iconLeft="search"
+              placeholder="Buscar..."
+            />
+            <Select
+              q:slot="center"
+              variant="quiet"
+              size="sm"
+              iconLeft="filter"
+              placeholder="Estado"
+              options={[
+                { value: "active", label: "Activo" },
+                { value: "pending", label: "Pendiente" },
+              ]}
+            />
+          </Toolbar>
+          <div class="showcase-grid">
+            <StatCard
+              label="Activos"
+              value="1,248"
+              icon="student"
+              tone="success"
+            />
+            <StatCard
+              label="Pendientes"
+              value="42"
+              icon="warning"
+              tone="warning"
+            />
+          </div>
+        </AppShell>
+
+        <PageHeader
+          eyebrow="Revision actual"
           title="Toolbar"
           description="Barra operacional para busqueda, filtros, rangos de fecha y acciones de modulo."
           meta="Pattern"

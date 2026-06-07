@@ -15,15 +15,36 @@ const getInitials = (name: string) =>
 type SidebarItemButtonProps = {
   item: SidebarItem;
   activeItem?: string;
+  openItems?: string[];
   collapsed?: boolean;
   depth?: number;
   onNavigate$?: SidebarProps["onNavigate$"];
+  onToggleItem$?: SidebarProps["onToggleItem$"];
 };
 
+const hasActiveDescendant = (item: SidebarItem, activeItem?: string): boolean =>
+  Boolean(
+    item.children?.some(
+      (child) =>
+        child.active || child.id === activeItem || hasActiveDescendant(child, activeItem),
+    ),
+  );
+
 const SidebarItemButton = component$<SidebarItemButtonProps>(
-  ({ item, activeItem, collapsed, depth = 0, onNavigate$ }) => {
+  ({
+    item,
+    activeItem,
+    openItems,
+    collapsed,
+    depth = 0,
+    onNavigate$,
+    onToggleItem$,
+  }) => {
     const isActive = item.active || item.id === activeItem;
     const hasChildren = Boolean(item.children?.length);
+    const isOpen = openItems
+      ? openItems.includes(item.id) || hasActiveDescendant(item, activeItem)
+      : item.open ?? true;
 
     return (
       <div class="ui-sidebar__item-wrap" data-depth={depth}>
@@ -33,8 +54,16 @@ const SidebarItemButton = component$<SidebarItemButtonProps>(
           title={collapsed ? item.label : undefined}
           data-active={isActive ? "true" : undefined}
           data-disabled={item.disabled ? "true" : undefined}
+          data-open={hasChildren && isOpen ? "true" : undefined}
+          aria-expanded={hasChildren ? (isOpen ? "true" : "false") : undefined}
           disabled={item.disabled}
-          onClick$={() => onNavigate$?.(item)}
+          onClick$={() => {
+            if (hasChildren) {
+              onToggleItem$?.(item, !isOpen);
+            }
+
+            onNavigate$?.(item);
+          }}
         >
           <span class="ui-sidebar__item-icon" aria-hidden="true">
             <AppIcon intent={item.icon} context="navigation" size="sm" />
@@ -51,16 +80,23 @@ const SidebarItemButton = component$<SidebarItemButtonProps>(
         </button>
 
         {!collapsed && hasChildren && (
-          <div class="ui-sidebar__children">
-            {item.children?.map((child) => (
-              <SidebarItemButton
-                key={child.id}
-                item={child}
-                activeItem={activeItem}
-                depth={depth + 1}
-                onNavigate$={onNavigate$}
-              />
-            ))}
+          <div
+            class="ui-sidebar__children"
+            data-open={isOpen ? "true" : undefined}
+          >
+            <div class="ui-sidebar__children-inner">
+              {item.children?.map((child) => (
+                <SidebarItemButton
+                  key={child.id}
+                  item={child}
+                  activeItem={activeItem}
+                  openItems={openItems}
+                  depth={depth + 1}
+                  onNavigate$={onNavigate$}
+                  onToggleItem$={onToggleItem$}
+                />
+              ))}
+            </div>
           </div>
         )}
       </div>
@@ -73,12 +109,14 @@ export const Sidebar = component$<SidebarProps>(
     brand,
     sections,
     activeItem,
+    openItems,
     collapsed,
     clock,
     systemStatus,
     user,
     footerItems,
     onNavigate$,
+    onToggleItem$,
     onToggleCollapse$,
   }) => {
     const initials = user?.initials ?? (user ? getInitials(user.name) : "");
@@ -179,8 +217,10 @@ export const Sidebar = component$<SidebarProps>(
                     key={item.id}
                     item={item}
                     activeItem={activeItem}
+                    openItems={openItems}
                     collapsed={collapsed}
                     onNavigate$={onNavigate$}
+                    onToggleItem$={onToggleItem$}
                   />
                 ))}
               </div>
@@ -196,8 +236,10 @@ export const Sidebar = component$<SidebarProps>(
                   key={item.id}
                   item={item}
                   activeItem={activeItem}
+                  openItems={openItems}
                   collapsed={collapsed}
                   onNavigate$={onNavigate$}
+                  onToggleItem$={onToggleItem$}
                 />
               ))}
             </div>

@@ -49,6 +49,7 @@ export type SidebarItem = {
   href?: string;
   badge?: string | number;
   active?: boolean;
+  open?: boolean;
   disabled?: boolean;
   children?: SidebarItem[];
 };
@@ -63,11 +64,13 @@ export type SidebarProps = {
   brand: SidebarBrand;
   sections: SidebarSection[];
   activeItem?: string;
+  openItems?: string[];
   collapsed?: boolean;
   clock?: SidebarClock;
   systemStatus?: SidebarSystemStatus;
   user?: SidebarUser;
   footerItems?: SidebarItem[];
   onNavigate$?: QRL<(item: SidebarItem) => void>;
+  onToggleItem$?: QRL<(item: SidebarItem, open: boolean) => void>;
   onToggleCollapse$?: QRL<() => void>;
 };
