@@ -1,5 +1,8 @@
 export { Accordion } from "./composed/Accordion/Accordion";
+export { Dialog } from "./composed/Dialog/Dialog";
+export { DropdownMenu } from "./composed/DropdownMenu/DropdownMenu";
 export { SearchSelect } from "./composed/SearchSelect/SearchSelect";
+export { Tabs } from "./composed/Tabs/Tabs";
 export { Badge } from "./primitives/Badge/Badge";
 export { Button } from "./primitives/Button/Button";
 export { Checkbox } from "./primitives/Checkbox/Checkbox";
@@ -14,3 +17,4 @@ export { Textarea } from "./primitives/Textarea/Textarea";
 export { PageHeader } from "./patterns/PageHeader/PageHeader";
 export { DataTable } from "./patterns/DataTable/DataTable";
 export { Sidebar } from "./patterns/Sidebar/Sidebar";
+export { AppShell } from "./patterns/AppShell/AppShell";

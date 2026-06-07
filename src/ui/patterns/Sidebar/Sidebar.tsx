@@ -75,6 +75,7 @@ export const Sidebar = component$<SidebarProps>(
     activeItem,
     collapsed,
     clock,
+    systemStatus,
     user,
     footerItems,
     onNavigate$,
@@ -120,6 +121,49 @@ export const Sidebar = component$<SidebarProps>(
               <strong>{clock.time}</strong>
               {clock.date && <small>{clock.date}</small>}
             </span>
+          </div>
+        )}
+
+        {systemStatus && (
+          <div class="ui-sidebar__system">
+            {systemStatus.items?.length ? (
+              <div class="ui-sidebar__status-list">
+                {systemStatus.items.map((item) => (
+                  <div
+                    class="ui-sidebar__status"
+                    data-tone={item.tone}
+                    title={
+                      collapsed
+                        ? `${item.label}${item.value ? `: ${item.value}` : ""}`
+                        : undefined
+                    }
+                    key={item.id}
+                  >
+                    <span class="ui-sidebar__status-dot" aria-hidden="true" />
+                    <span class="ui-sidebar__status-copy">
+                      <span>{item.label}</span>
+                      {item.value && <strong>{item.value}</strong>}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            ) : null}
+
+            {systemStatus.session && (
+              <div
+                class="ui-sidebar__session"
+                data-tone={systemStatus.session.tone ?? "neutral"}
+                title={collapsed ? systemStatus.session.remaining : undefined}
+              >
+                <span class="ui-sidebar__session-icon" aria-hidden="true">
+                  <AppIcon intent="lock" size="sm" />
+                </span>
+                <span class="ui-sidebar__session-copy">
+                  <span>{systemStatus.session.label ?? "Sesion"}</span>
+                  <strong>{systemStatus.session.remaining}</strong>
+                </span>
+              </div>
+            )}
           </div>
         )}
 

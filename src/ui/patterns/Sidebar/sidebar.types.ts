@@ -14,6 +14,26 @@ export type SidebarClock = {
   label?: string;
 };
 
+export type SidebarStatusTone = "online" | "warning" | "offline" | "neutral";
+
+export type SidebarStatusItem = {
+  id: string;
+  label: string;
+  value?: string;
+  tone: SidebarStatusTone;
+};
+
+export type SidebarSessionStatus = {
+  label?: string;
+  remaining: string;
+  tone?: SidebarStatusTone;
+};
+
+export type SidebarSystemStatus = {
+  items?: SidebarStatusItem[];
+  session?: SidebarSessionStatus;
+};
+
 export type SidebarUser = {
   name: string;
   role?: string;
@@ -45,6 +65,7 @@ export type SidebarProps = {
   activeItem?: string;
   collapsed?: boolean;
   clock?: SidebarClock;
+  systemStatus?: SidebarSystemStatus;
   user?: SidebarUser;
   footerItems?: SidebarItem[];
   onNavigate$?: QRL<(item: SidebarItem) => void>;

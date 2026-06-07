@@ -11,6 +11,8 @@ Este componente es visual y configurable. No conoce rutas reales, permisos ni se
 - Secciones de navegacion.
 - Items activos, deshabilitados, con badge y con hijos.
 - Reloj/fecha recibido por props.
+- Indicadores de sistema recibidos por props.
+- Contador de sesion recibido por props.
 - Avatar o iniciales del usuario.
 - Acciones inferiores como configuracion o cerrar sesion.
 
@@ -23,6 +25,7 @@ Este componente es visual y configurable. No conoce rutas reales, permisos ni se
 | `activeItem` | `string` | Id del item activo. |
 | `collapsed` | `boolean` | Muestra solo iconos. |
 | `clock` | `SidebarClock` | Hora y fecha mostradas en el panel. |
+| `systemStatus` | `SidebarSystemStatus` | Semaforos de sistema y contador de sesion. |
 | `user` | `SidebarUser` | Avatar, nombre, rol y estado. |
 | `footerItems` | `SidebarItem[]` | Acciones inferiores. |
 | `onNavigate$` | `QRL<(item: SidebarItem) => void>` | Evento al seleccionar item. |
@@ -42,6 +45,17 @@ Este componente es visual y configurable. No conoce rutas reales, permisos ni se
     label: "Turno matutino",
     time: "08:45",
     date: "Lunes 7 de junio",
+  }}
+  systemStatus={{
+    items: [
+      { id: "api", label: "API", value: "Activa", tone: "online" },
+      { id: "db", label: "Base de datos", value: "Estable", tone: "online" },
+    ],
+    session: {
+      label: "Sesion expira en",
+      remaining: "14:32",
+      tone: "warning",
+    },
   }}
   user={{
     name: "Mac Segovia",
@@ -70,4 +84,4 @@ Este componente es visual y configurable. No conoce rutas reales, permisos ni se
 
 El `Sidebar` es estructura de producto. Debe sentirse estable, claro y facil de escanear.
 
-La app real debe calcular permisos, ruta activa y hora; este componente solo representa esos datos con consistencia visual.
+La app real debe calcular permisos, ruta activa, hora, estado del servidor y tiempo restante de sesion. Este componente solo representa esos datos con consistencia visual.

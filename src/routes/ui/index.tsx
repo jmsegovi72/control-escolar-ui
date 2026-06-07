@@ -4,11 +4,14 @@ import type { DocumentHead } from "@builder.io/qwik-city";
 import { AppIcon } from "~/ui/icons";
 import {
   Accordion,
+  AppShell,
   Badge,
   Button,
   Checkbox,
   ChoiceGroup,
   DataTable,
+  Dialog,
+  DropdownMenu,
   Field,
   IconButton,
   Input,
@@ -18,6 +21,7 @@ import {
   SearchSelect,
   Select,
   Sidebar,
+  Tabs,
   Textarea,
 } from "~/ui";
 
@@ -66,9 +70,9 @@ export default component$(() => {
 
         <PageHeader
           eyebrow="Revision actual"
-          title="Sidebar"
-          description="Navegacion principal configurable con marca, reloj, avatar, secciones y acciones inferiores."
-          meta="Pattern"
+          title="DropdownMenu"
+          description="Menu compacto para acciones de tabla, usuario, configuracion y herramientas."
+          meta="Composed"
         >
           <Button q:slot="actions" iconLeft="add">
             Nuevo alumno
@@ -78,7 +82,369 @@ export default component$(() => {
           </Button>
         </PageHeader>
 
-        <Panel eyebrow="Revision actual" title="Sidebar: navegacion de producto">
+        <Panel eyebrow="Revision actual" title="DropdownMenu: acciones compactas">
+          <div class="stack">
+            <div class="inline-stack">
+              <DropdownMenu
+                label="Acciones"
+                icon="settings"
+                items={[
+                  { type: "label", id: "student-label", label: "Alumno" },
+                  { id: "view", label: "Ver detalle", icon: "view" },
+                  { id: "edit", label: "Editar", icon: "edit", shortcut: "E" },
+                  {
+                    id: "toggle",
+                    label: "Activar / Desactivar",
+                    icon: "toggle",
+                    tone: "warning",
+                  },
+                  { type: "separator", id: "student-separator" },
+                  {
+                    id: "delete",
+                    label: "Eliminar",
+                    icon: "delete",
+                    tone: "danger",
+                  },
+                ]}
+              />
+
+              <DropdownMenu
+                label="Usuario"
+                icon="person"
+                align="start"
+                items={[
+                  { id: "profile", label: "Mi perfil", icon: "person" },
+                  { id: "settings", label: "Configuracion", icon: "settings" },
+                  { type: "separator", id: "user-separator" },
+                  { id: "logout", label: "Cerrar sesion", icon: "logout" },
+                ]}
+              />
+
+              <DropdownMenu
+                label="Mas"
+                size="sm"
+                items={[
+                  { id: "print", label: "Imprimir", icon: "print" },
+                  { id: "download", label: "Exportar", icon: "download" },
+                  { id: "disabled", label: "Bloqueado", icon: "lock", disabled: true },
+                ]}
+              />
+            </div>
+
+            <Panel
+              eyebrow="Uso esperado"
+              title="Mismo patron, muchos lugares"
+              description="La tabla, el avatar y los encabezados pueden usar el mismo menu para evitar experiencias distintas."
+              variant="subtle"
+            >
+              <div class="inline-stack">
+                <Badge tone="info">DataTable</Badge>
+                <Badge tone="info">Avatar</Badge>
+                <Badge tone="info">Toolbar</Badge>
+                <Badge tone="info">Sidebar</Badge>
+              </div>
+            </Panel>
+          </div>
+        </Panel>
+
+        <Panel eyebrow="Accordion" title="Secciones expandibles">
+          <div class="stack">
+            <Accordion
+              open
+              icon="filter"
+              tone="primary"
+              title="Filtros avanzados"
+              description="Opciones adicionales para una consulta mas precisa."
+            >
+              <div class="showcase-grid">
+                <Field label="Grupo">
+                  <Select
+                    variant="line"
+                    placeholder="Selecciona grupo"
+                    options={[
+                      { value: "a", label: "Grupo A" },
+                      { value: "b", label: "Grupo B" },
+                    ]}
+                  />
+                </Field>
+                <Field label="Estado">
+                  <Select
+                    variant="line"
+                    placeholder="Selecciona estado"
+                    options={[
+                      { value: "active", label: "Activo" },
+                      { value: "pending", label: "Pendiente" },
+                    ]}
+                  />
+                </Field>
+              </div>
+            </Accordion>
+
+            <Accordion
+              variant="subtle"
+              icon="warning"
+              tone="warning"
+              title="Documentos pendientes"
+              description="Hay informacion que debe completarse antes de cerrar el expediente."
+            >
+              <div class="inline-stack">
+                <Badge tone="warning">Acta pendiente</Badge>
+                <Badge tone="warning">CURP pendiente</Badge>
+              </div>
+            </Accordion>
+
+            <Accordion
+              variant="outlined"
+              size="sm"
+              disabled
+              icon="lock"
+              title="Seccion bloqueada"
+              description="Disponible solo para administradores."
+            >
+              Contenido no disponible.
+            </Accordion>
+          </div>
+        </Panel>
+
+        <Panel eyebrow="Dialog" title="Confirmaciones y avisos">
+          <div class="stack">
+            <Dialog
+              open
+              tone="danger"
+              title="Eliminar alumno"
+              description="Esta accion no se puede deshacer. El expediente dejara de aparecer en consultas activas."
+            >
+              <p class="page-copy">
+                Alumno seleccionado: Daniela Ruiz Perez, matricula CE-2026-001.
+              </p>
+              <Button q:slot="footer" variant="secondary">
+                Cancelar
+              </Button>
+              <Button q:slot="footer" variant="danger" iconLeft="delete">
+                Eliminar
+              </Button>
+            </Dialog>
+
+            <div class="showcase-grid">
+              <Dialog
+                open
+                tone="warning"
+                size="sm"
+                title="Sesion por expirar"
+                description="Quedan 02:00 minutos antes de cerrar la sesion."
+              >
+                <Button q:slot="footer" variant="secondary">
+                  Salir
+                </Button>
+                <Button q:slot="footer" iconLeft="refresh">
+                  Renovar sesion
+                </Button>
+              </Dialog>
+
+              <Dialog
+                open
+                tone="success"
+                size="sm"
+                title="Cambios guardados"
+                description="El expediente se actualizo correctamente."
+              >
+                <Button q:slot="footer" variant="secondary">
+                  Cerrar
+                </Button>
+                <Button q:slot="footer" iconLeft="view">
+                  Ver detalle
+                </Button>
+              </Dialog>
+            </div>
+          </div>
+        </Panel>
+
+        <Panel eyebrow="Tabs" title="Expediente escolar">
+          <div class="stack">
+            <Tabs
+              activeTab="grades"
+              items={[
+                { id: "profile", label: "Datos", icon: "person" },
+                { id: "documents", label: "Documentos", icon: "download", badge: 3 },
+                { id: "grades", label: "Calificaciones", icon: "class" },
+                { id: "history", label: "Historial", icon: "schedule" },
+              ]}
+            >
+              <Panel
+                eyebrow="Alumno"
+                title="Calificaciones"
+                description="Resumen academico del ciclo actual."
+              >
+                <div class="inline-stack">
+                  <Badge tone="success">Promedio 9.1</Badge>
+                  <Badge tone="warning">2 pendientes</Badge>
+                  <Badge tone="info">Grupo A</Badge>
+                </div>
+              </Panel>
+            </Tabs>
+
+            <Tabs
+              variant="contained"
+              fullWidth
+              activeTab="general"
+              items={[
+                { id: "general", label: "General" },
+                { id: "security", label: "Seguridad", icon: "lock" },
+                { id: "disabled", label: "Bloqueado", disabled: true },
+              ]}
+            >
+              <Field label="Nombre de configuracion">
+                <Input variant="line" placeholder="Configuracion general" />
+              </Field>
+            </Tabs>
+
+            <Tabs
+              variant="pills"
+              size="sm"
+              activeTab="active"
+              items={[
+                { id: "active", label: "Activos", badge: 24 },
+                { id: "pending", label: "Pendientes", badge: 7 },
+                { id: "inactive", label: "Bajas", badge: 2 },
+              ]}
+            >
+              <span class="page-copy">Filtro visual para estados rapidos.</span>
+            </Tabs>
+          </div>
+        </Panel>
+
+        <Panel eyebrow="AppShell" title="Pantalla administrativa">
+          <AppShell
+            eyebrow="Modulo escolar"
+            title="Alumnos"
+            description="Consulta expedientes, revisa estatus y ejecuta acciones por fila."
+            meta="Ciclo 2026"
+          >
+            <Sidebar
+              q:slot="sidebar"
+              brand={{
+                name: "Control Escolar",
+                shortName: "CE",
+                subtitle: "Instituto Central",
+              }}
+              activeItem="students"
+              clock={{
+                label: "Turno matutino",
+                time: "08:45",
+                date: "Lunes 7 de junio",
+              }}
+              systemStatus={{
+                items: [
+                  { id: "api", label: "API", value: "Activa", tone: "online" },
+                  {
+                    id: "database",
+                    label: "Base de datos",
+                    value: "Estable",
+                    tone: "online",
+                  },
+                ],
+                session: {
+                  label: "Sesion expira en",
+                  remaining: "14:32",
+                  tone: "warning",
+                },
+              }}
+              user={{
+                name: "Mac Segovia",
+                role: "Administrador",
+                status: "Sesion activa",
+              }}
+              sections={[
+                {
+                  id: "main",
+                  label: "Operacion escolar",
+                  items: [
+                    { id: "dashboard", label: "Inicio", icon: "dashboard" },
+                    {
+                      id: "students",
+                      label: "Alumnos",
+                      icon: "student",
+                      badge: 12,
+                    },
+                    { id: "teachers", label: "Docentes", icon: "teacher" },
+                    { id: "classes", label: "Clases", icon: "class" },
+                  ],
+                },
+                {
+                  id: "admin",
+                  label: "Administracion",
+                  items: [
+                    { id: "schedule", label: "Ciclos escolares", icon: "schedule" },
+                    { id: "users", label: "Usuarios", icon: "user-settings" },
+                  ],
+                },
+              ]}
+              footerItems={[
+                { id: "settings", label: "Configuracion", icon: "settings" },
+                { id: "logout", label: "Cerrar sesion", icon: "logout" },
+              ]}
+            />
+
+            <Button q:slot="actions" iconLeft="add">
+              Nuevo alumno
+            </Button>
+            <Button q:slot="actions" variant="secondary" iconLeft="download">
+              Exportar
+            </Button>
+
+            <Input
+              q:slot="toolbar"
+              variant="quiet"
+              size="sm"
+              iconLeft="search"
+              placeholder="Buscar alumno..."
+            />
+            <Select
+              q:slot="toolbar"
+              variant="quiet"
+              size="sm"
+              iconLeft="filter"
+              placeholder="Estado"
+              options={[
+                { value: "active", label: "Activo" },
+                { value: "pending", label: "Pendiente" },
+                { value: "inactive", label: "Baja" },
+              ]}
+            />
+
+            <DataTable
+              searchable={false}
+              selectable
+              rows={studentRows}
+              columns={[
+                { key: "name", label: "Alumno", sortable: true },
+                { key: "enrollment", label: "Matricula", width: "140px" },
+                { key: "group", label: "Grupo", align: "center", width: "100px" },
+                {
+                  key: "status",
+                  label: "Estado",
+                  align: "center",
+                  width: "120px",
+                  badge: {
+                    toneMap: {
+                      Activo: "success",
+                      Pendiente: "warning",
+                      Baja: "danger",
+                    },
+                  },
+                },
+              ]}
+              actions={[
+                { label: "Ver detalle", icon: "view" },
+                { label: "Editar", icon: "edit" },
+                { label: "Eliminar", icon: "delete", tone: "danger" },
+              ]}
+              pagination={{ page: 1, limit: 10, total: 32 }}
+            />
+          </AppShell>
+        </Panel>
+
+        <Panel eyebrow="Sidebar" title="Navegacion de producto">
           <div class="showcase-grid">
             <Sidebar
               brand={{
@@ -91,6 +457,22 @@ export default component$(() => {
                 label: "Turno matutino",
                 time: "08:45",
                 date: "Lunes 7 de junio",
+              }}
+              systemStatus={{
+                items: [
+                  { id: "api", label: "API", value: "Activa", tone: "online" },
+                  {
+                    id: "database",
+                    label: "Base de datos",
+                    value: "Estable",
+                    tone: "online",
+                  },
+                ],
+                session: {
+                  label: "Sesion expira en",
+                  remaining: "14:32",
+                  tone: "warning",
+                },
               }}
               user={{
                 name: "Mac Segovia",
@@ -153,6 +535,22 @@ export default component$(() => {
                 label: "Turno matutino",
                 time: "08:45",
                 date: "Lunes 7 de junio",
+              }}
+              systemStatus={{
+                items: [
+                  { id: "api", label: "API", value: "Activa", tone: "online" },
+                  {
+                    id: "database",
+                    label: "Base de datos",
+                    value: "Estable",
+                    tone: "online",
+                  },
+                ],
+                session: {
+                  label: "Sesion expira en",
+                  remaining: "14:32",
+                  tone: "warning",
+                },
               }}
               user={{
                 name: "Mac Segovia",
