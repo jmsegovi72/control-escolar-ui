@@ -6,12 +6,18 @@ import {
   Accordion,
   AppShell,
   Badge,
+  Breadcrumbs,
   Button,
   Checkbox,
   ChoiceGroup,
+  ConfirmAction,
   DataTable,
+  DateInput,
+  DateRangeInput,
   Dialog,
   DropdownMenu,
+  EmptyState,
+  FileUpload,
   Field,
   IconButton,
   Input,
@@ -21,8 +27,14 @@ import {
   SearchSelect,
   Select,
   Sidebar,
+  Skeleton,
+  StatCard,
+  Stepper,
   Tabs,
   Textarea,
+  Toast,
+  Tooltip,
+  Toolbar,
 } from "~/ui";
 
 type StudentPreview = {
@@ -70,9 +82,9 @@ export default component$(() => {
 
         <PageHeader
           eyebrow="Revision actual"
-          title="DropdownMenu"
-          description="Menu compacto para acciones de tabla, usuario, configuracion y herramientas."
-          meta="Composed"
+          title="Toolbar"
+          description="Barra operacional para busqueda, filtros, rangos de fecha y acciones de modulo."
+          meta="Pattern"
         >
           <Button q:slot="actions" iconLeft="add">
             Nuevo alumno
@@ -82,7 +94,460 @@ export default component$(() => {
           </Button>
         </PageHeader>
 
-        <Panel eyebrow="Revision actual" title="DropdownMenu: acciones compactas">
+        <Panel eyebrow="Revision actual" title="Toolbar: busqueda, filtros y acciones">
+          <div class="stack">
+            <Toolbar>
+              <Input
+                q:slot="leading"
+                variant="quiet"
+                size="sm"
+                iconLeft="search"
+                placeholder="Buscar alumno..."
+              />
+              <DateRangeInput q:slot="center" variant="quiet" size="sm" />
+              <Select
+                q:slot="center"
+                variant="quiet"
+                size="sm"
+                iconLeft="filter"
+                placeholder="Estado"
+                options={[
+                  { value: "active", label: "Activo" },
+                  { value: "pending", label: "Pendiente" },
+                  { value: "inactive", label: "Baja" },
+                ]}
+              />
+              <Button q:slot="actions" iconLeft="add">
+                Nuevo alumno
+              </Button>
+              <DropdownMenu
+                q:slot="actions"
+                label="Mas"
+                size="sm"
+                items={[
+                  { id: "import", label: "Importar CSV", icon: "upload" },
+                  { id: "export", label: "Exportar", icon: "download" },
+                  { type: "separator", id: "sep" },
+                  { id: "print", label: "Imprimir", icon: "print" },
+                ]}
+              />
+            </Toolbar>
+
+            <Toolbar density="compact">
+              <Input
+                q:slot="leading"
+                variant="quiet"
+                size="sm"
+                iconLeft="search"
+                placeholder="Busqueda compacta..."
+              />
+              <Button q:slot="actions" size="sm" variant="secondary" iconLeft="filter">
+                Filtros
+              </Button>
+              <Button q:slot="actions" size="sm" iconLeft="download">
+                Exportar
+              </Button>
+            </Toolbar>
+          </div>
+        </Panel>
+
+        <Panel eyebrow="ConfirmAction" title="Decisiones delicadas">
+          <div class="stack">
+            <ConfirmAction
+              open
+              tone="danger"
+              title="Eliminar alumno"
+              description="Esta accion no se puede deshacer."
+              details="Se eliminara el expediente CE-2026-001 de las consultas activas."
+              confirmLabel="Eliminar"
+            />
+
+            <div class="showcase-grid">
+              <ConfirmAction
+                open
+                tone="warning"
+                title="Desactivar usuario"
+                description="El usuario no podra iniciar sesion hasta que sea reactivado."
+                confirmLabel="Desactivar"
+              />
+
+              <ConfirmAction
+                open
+                tone="success"
+                title="Importar alumnos"
+                description="Se importaran 128 registros validos desde el archivo CSV."
+                confirmLabel="Importar"
+                loading
+              />
+            </div>
+          </div>
+        </Panel>
+
+        <Panel eyebrow="DateRangeInput" title="Filtros por periodo">
+          <div class="stack">
+            <DateRangeInput
+              startLabel="Desde"
+              endLabel="Hasta"
+              startValue="2026-01-01"
+              endValue="2026-06-07"
+              hint="Consulta movimientos dentro del periodo seleccionado."
+            />
+
+            <div class="showcase-grid">
+              <DateRangeInput
+                variant="box"
+                startLabel="Inicio de ciclo"
+                endLabel="Fin de ciclo"
+                startValue="2026-08-01"
+                endValue="2027-07-31"
+              />
+
+              <DateRangeInput
+                variant="quiet"
+                size="sm"
+                startLabel="Capturado desde"
+                endLabel="Capturado hasta"
+              />
+
+              <DateRangeInput
+                error="La fecha final no puede ser menor que la inicial."
+                startValue="2026-06-07"
+                endValue="2026-01-01"
+              />
+            </div>
+          </div>
+        </Panel>
+
+        <Panel eyebrow="DateInput" title="Fechas escolares">
+          <div class="stack">
+            <div class="showcase-grid">
+              <Field label="Fecha de nacimiento" required>
+                <DateInput max="2026-06-07" required />
+              </Field>
+
+              <Field label="Fecha de inscripcion">
+                <DateInput variant="box" value="2026-08-15" />
+              </Field>
+
+              <Field label="Filtro compacto">
+                <DateInput variant="quiet" size="sm" />
+              </Field>
+
+              <Field label="Vigencia de documento" error="La fecha es obligatoria.">
+                <DateInput invalid variant="line" />
+              </Field>
+            </div>
+
+            <DateInput showIcon={false} variant="line" />
+          </div>
+        </Panel>
+
+        <Panel eyebrow="Stepper" title="Procesos escolares">
+          <div class="stack">
+            <Stepper
+              activeStep="documents"
+              steps={[
+                {
+                  id: "student",
+                  label: "Alumno",
+                  description: "Datos principales",
+                },
+                {
+                  id: "tutor",
+                  label: "Tutor",
+                  description: "Contacto responsable",
+                },
+                {
+                  id: "documents",
+                  label: "Documentos",
+                  description: "Acta, CURP y comprobantes",
+                },
+                {
+                  id: "review",
+                  label: "Revision",
+                  description: "Validacion final",
+                },
+              ]}
+            />
+
+            <Stepper
+              orientation="vertical"
+              steps={[
+                {
+                  id: "template",
+                  label: "Plantilla descargada",
+                  description: "CSV oficial",
+                  status: "complete",
+                },
+                {
+                  id: "upload",
+                  label: "Archivo cargado",
+                  description: "alumnos-ciclo-2026.csv",
+                  status: "complete",
+                },
+                {
+                  id: "validation",
+                  label: "Validacion",
+                  description: "Falta columna matricula",
+                  status: "error",
+                },
+                {
+                  id: "import",
+                  label: "Importacion",
+                  description: "Pendiente",
+                  status: "pending",
+                },
+              ]}
+            />
+          </div>
+        </Panel>
+
+        <Panel eyebrow="FileUpload" title="Documentos y carga masiva">
+          <div class="stack">
+            <FileUpload
+              mode="document"
+              label="Acta de nacimiento"
+              description="Carga el documento del alumno en PDF o imagen legible."
+              accept=".pdf,.jpg,.png"
+              maxSizeLabel="hasta 5 MB"
+              files={[
+                {
+                  id: "birth-certificate",
+                  name: "acta-daniela-ruiz.pdf",
+                  sizeLabel: "1.8 MB",
+                  status: "uploaded",
+                },
+              ]}
+            />
+
+            <FileUpload
+              mode="bulk"
+              label="Carga masiva de alumnos"
+              description="Importa alumnos desde un archivo CSV preparado con la plantilla oficial."
+              accept=".csv"
+              templateLabel="Descargar plantilla CSV"
+              helpText="El archivo debe incluir matricula, nombre, grupo, turno y estado."
+              files={[
+                {
+                  id: "students-csv",
+                  name: "alumnos-ciclo-2026.csv",
+                  sizeLabel: "42 KB",
+                  status: "ready",
+                },
+              ]}
+            />
+
+            <FileUpload
+              mode="bulk"
+              label="Carga por lote con errores"
+              accept=".csv"
+              invalid
+              error="El archivo no contiene la columna obligatoria matricula."
+              files={[
+                {
+                  id: "bad-csv",
+                  name: "alumnos-incompleto.csv",
+                  status: "error",
+                  message: "Falta columna matricula",
+                },
+              ]}
+            />
+          </div>
+        </Panel>
+
+        <Panel eyebrow="StatCard" title="Resumen operativo">
+          <div class="showcase-grid">
+            <StatCard
+              label="Alumnos activos"
+              value="1,248"
+              description="Ciclo escolar 2026"
+              icon="student"
+              tone="success"
+              trend={{ value: "8%", direction: "up" }}
+            />
+            <StatCard
+              label="Docentes registrados"
+              value="86"
+              description="Plantilla academica"
+              icon="teacher"
+              tone="info"
+              trend={{ value: "3", direction: "flat" }}
+            />
+            <StatCard
+              label="Documentos pendientes"
+              value="42"
+              description="Requieren revision"
+              icon="download"
+              tone="warning"
+              trend={{ value: "12%", direction: "down" }}
+            />
+            <StatCard
+              loading
+              label="Usuarios bloqueados"
+              value="0"
+              icon="lock"
+              tone="danger"
+            />
+          </div>
+        </Panel>
+
+        <Panel eyebrow="Breadcrumbs" title="Ubicacion en el sistema">
+          <div class="stack">
+            <Breadcrumbs
+              items={[
+                { id: "home", label: "Inicio", icon: "dashboard" },
+                { id: "students", label: "Alumnos", icon: "student" },
+                {
+                  id: "record",
+                  label: "Expediente CE-2026-001",
+                  icon: "person",
+                  current: true,
+                },
+              ]}
+            />
+
+            <Breadcrumbs
+              items={[
+                { id: "settings", label: "Configuracion", icon: "settings" },
+                { id: "users", label: "Usuarios", icon: "user-settings" },
+                {
+                  id: "permissions",
+                  label: "Permisos del perfil administrador",
+                  current: true,
+                },
+              ]}
+            />
+          </div>
+        </Panel>
+
+        <Panel eyebrow="Tooltip" title="Ayuda contextual breve">
+          <div class="stack">
+            <div class="inline-stack">
+              <Tooltip content="Ver detalle">
+                <IconButton label="Ver detalle" icon="view" />
+              </Tooltip>
+              <Tooltip content="Editar alumno" placement="bottom">
+                <IconButton label="Editar alumno" icon="edit" variant="secondary" />
+              </Tooltip>
+              <Tooltip content="Eliminar expediente" placement="right">
+                <IconButton label="Eliminar expediente" icon="delete" variant="danger" />
+              </Tooltip>
+              <Tooltip content="Configuracion del modulo" placement="left">
+                <IconButton label="Configuracion del modulo" icon="settings" variant="ghost" />
+              </Tooltip>
+            </div>
+
+            <Panel
+              eyebrow="Indicadores"
+              title="Estados con ayuda"
+              description="El texto visible sigue siendo lo principal; el tooltip solo aclara detalles."
+              variant="subtle"
+            >
+              <div class="inline-stack">
+                <Tooltip content="API activa y respondiendo en menos de 200 ms">
+                  <Badge tone="success">API activa</Badge>
+                </Tooltip>
+                <Tooltip content="La sesion expira en 14 minutos">
+                  <Badge tone="warning">Sesion</Badge>
+                </Tooltip>
+              </div>
+            </Panel>
+          </div>
+        </Panel>
+
+        <Panel eyebrow="Skeleton" title="Carga con estructura">
+          <div class="stack">
+            <Skeleton variant="table" rows={5} />
+
+            <div class="showcase-grid">
+              <Panel eyebrow="Formulario" title="Expediente cargando">
+                <Skeleton variant="form" rows={4} />
+              </Panel>
+
+              <Panel eyebrow="Resumen" title="Bloques ligeros">
+                <div class="stack">
+                  <div class="inline-stack">
+                    <Skeleton variant="avatar" size="lg" />
+                    <Skeleton variant="text" rows={3} />
+                  </div>
+                  <Skeleton variant="block" rows={1} />
+                </div>
+              </Panel>
+            </div>
+          </div>
+        </Panel>
+
+        <Panel eyebrow="EmptyState" title="Sin datos utiles">
+          <div class="stack">
+            <EmptyState
+              tone="info"
+              size="lg"
+              icon="student"
+              title="No hay alumnos registrados"
+              description="Crea el primer expediente para comenzar a trabajar con el modulo."
+              actionLabel="Nuevo alumno"
+              secondaryActionLabel="Importar lista"
+            />
+
+            <div class="showcase-grid">
+              <EmptyState
+                size="sm"
+                icon="search"
+                title="Sin resultados"
+                description="No encontramos coincidencias con los filtros actuales."
+                secondaryActionLabel="Limpiar filtros"
+              />
+
+              <EmptyState
+                tone="warning"
+                icon="download"
+                title="Sin documentos"
+                description="El expediente todavia no tiene archivos cargados."
+                actionLabel="Subir documento"
+              />
+            </div>
+          </div>
+        </Panel>
+
+        <Panel eyebrow="Toast" title="Notificaciones del sistema">
+          <div class="stack">
+            <Toast
+              tone="success"
+              title="Cambios guardados"
+              description="El expediente de Daniela Ruiz Perez se actualizo correctamente."
+              dismissible
+            />
+
+            <Toast
+              tone="danger"
+              title="No se pudo conectar con el backend"
+              description="Revisa el estado del servidor o intenta nuevamente."
+              actionLabel="Reintentar"
+              progress={72}
+              dismissible
+            />
+
+            <div class="showcase-grid">
+              <Toast
+                tone="warning"
+                title="Sesion por expirar"
+                description="Quedan 02:00 minutos antes de cerrar la sesion."
+                actionLabel="Renovar"
+                progress={36}
+                placement="floating"
+              />
+
+              <Toast
+                tone="info"
+                title="Exportacion iniciada"
+                description="El archivo se esta preparando en segundo plano."
+                progress={45}
+              />
+            </div>
+          </div>
+        </Panel>
+
+        <Panel eyebrow="DropdownMenu" title="Acciones compactas">
           <div class="stack">
             <div class="inline-stack">
               <DropdownMenu
