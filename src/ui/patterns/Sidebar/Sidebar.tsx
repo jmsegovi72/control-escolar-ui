@@ -1,5 +1,6 @@
 import { component$ } from "@builder.io/qwik";
 
+import { UserMenu } from "~/ui/composed/UserMenu/UserMenu";
 import { AppIcon } from "~/ui/icons";
 import type { SidebarItem, SidebarProps } from "./sidebar.types";
 import "./sidebar.css";
@@ -114,6 +115,8 @@ export const Sidebar = component$<SidebarProps>(
     clock,
     systemStatus,
     user,
+    userActions,
+    userMenuSessionLabel,
     footerItems,
     onNavigate$,
     onToggleItem$,
@@ -245,7 +248,17 @@ export const Sidebar = component$<SidebarProps>(
             </div>
           ) : null}
 
-          {user && (
+          {user && userActions?.length ? (
+            <div class="ui-sidebar__user-menu">
+              <UserMenu
+                compact={collapsed}
+                align="start"
+                user={user}
+                actions={userActions}
+                sessionLabel={userMenuSessionLabel}
+              />
+            </div>
+          ) : user ? (
             <div class="ui-sidebar__user" title={collapsed ? user.name : undefined}>
               <div class="ui-sidebar__avatar" aria-hidden="true">
                 {user.avatarUrl ? (
@@ -260,7 +273,7 @@ export const Sidebar = component$<SidebarProps>(
                 {user.status && <small>{user.status}</small>}
               </div>
             </div>
-          )}
+          ) : null}
         </div>
       </aside>
     );

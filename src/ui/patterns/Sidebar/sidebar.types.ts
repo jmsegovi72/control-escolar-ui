@@ -1,5 +1,6 @@
 import type { QRL } from "@builder.io/qwik";
 
+import type { UserMenuAction } from "~/ui/composed/UserMenu/user-menu.types";
 import type { IconIntent } from "~/ui/icons";
 
 export type SidebarBrand = {
@@ -40,6 +41,7 @@ export type SidebarUser = {
   initials?: string;
   avatarUrl?: string;
   status?: string;
+  meta?: string;
 };
 
 export type SidebarItem = {
@@ -69,6 +71,8 @@ export type SidebarProps = {
   clock?: SidebarClock;
   systemStatus?: SidebarSystemStatus;
   user?: SidebarUser;
+  userActions?: UserMenuAction[];
+  userMenuSessionLabel?: string;
   footerItems?: SidebarItem[];
   onNavigate$?: QRL<(item: SidebarItem) => void>;
   onToggleItem$?: QRL<(item: SidebarItem, open: boolean) => void>;

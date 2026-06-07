@@ -35,6 +35,7 @@ import {
   Toast,
   Tooltip,
   Toolbar,
+  UserMenu,
   componentCategories,
   componentRegistry,
 } from "~/ui";
@@ -150,6 +151,118 @@ export default component$(() => {
 
         <PageHeader
           eyebrow="Revision actual"
+          title="UserMenu"
+          description="Menu profesional de cuenta: avatar, rol, sesion, perfil, seguridad, preferencias y cierre de sesion."
+          meta="Composed"
+        />
+
+        <Panel eyebrow="Revision actual" title="UserMenu: cuenta y acciones">
+          <div class="stack">
+            <div class="inline-stack">
+              <UserMenu
+                user={{
+                  name: "Mac Segovia",
+                  role: "Administrador",
+                  initials: "MS",
+                  status: "Sesion protegida",
+                  meta: "Ultimo acceso: hoy 09:48",
+                }}
+                sessionLabel="La sesion expira en 14:32"
+                actions={[
+                  { type: "label", id: "account", label: "Cuenta" },
+                  { id: "profile", label: "Ver perfil", icon: "person" },
+                  {
+                    id: "password",
+                    label: "Cambiar contraseña",
+                    icon: "lock",
+                  },
+                  {
+                    id: "preferences",
+                    label: "Preferencias",
+                    icon: "settings",
+                  },
+                  { type: "separator", id: "security-separator" },
+                  {
+                    id: "reset-login",
+                    label: "Resetear login",
+                    icon: "login-reset",
+                    tone: "warning",
+                  },
+                  {
+                    id: "logout",
+                    label: "Cerrar sesion",
+                    icon: "logout",
+                    tone: "danger",
+                  },
+                ]}
+              />
+
+              <UserMenu
+                size="sm"
+                user={{
+                  name: "Captura Escolar",
+                  role: "Mesa de control",
+                  initials: "CE",
+                  status: "Turno matutino",
+                }}
+                actions={[
+                  { id: "profile", label: "Ver perfil", icon: "person" },
+                  { id: "settings", label: "Configuracion", icon: "settings" },
+                  { type: "separator", id: "separator" },
+                  {
+                    id: "logout",
+                    label: "Cerrar sesion",
+                    icon: "logout",
+                    tone: "danger",
+                  },
+                ]}
+              />
+
+              <UserMenu
+                compact
+                align="start"
+                user={{
+                  name: "Docente Invitado",
+                  role: "Docente",
+                  initials: "DI",
+                }}
+                actions={[
+                  { id: "profile", label: "Ver perfil", icon: "person" },
+                  {
+                    id: "disabled",
+                    label: "Permisos avanzados",
+                    icon: "lock",
+                    disabled: true,
+                  },
+                  { type: "separator", id: "separator" },
+                  {
+                    id: "logout",
+                    label: "Cerrar sesion",
+                    icon: "logout",
+                    tone: "danger",
+                  },
+                ]}
+              />
+            </div>
+
+            <Panel
+              eyebrow="Contrato"
+              title="La app decide permisos y acciones"
+              description="El componente solo representa usuario, sesion y callbacks; no conoce rutas reales ni permisos reales."
+              variant="subtle"
+            >
+              <div class="inline-stack">
+                <Badge tone="success">perfil</Badge>
+                <Badge tone="info">preferencias</Badge>
+                <Badge tone="warning">seguridad</Badge>
+                <Badge tone="danger">cerrar sesion</Badge>
+              </div>
+            </Panel>
+          </div>
+        </Panel>
+
+        <PageHeader
+          eyebrow="Revision actual"
           title="Sidebar"
           description="Navegacion principal configurable, con submenus controlables, semaforos de sistema, reloj, usuario y modo colapsado."
           meta="Pattern"
@@ -230,7 +343,22 @@ export default component$(() => {
                 role: "Administrador",
                 initials: "MS",
                 status: "Sesion protegida",
+                meta: "Ultimo acceso: hoy 09:48",
               }}
+              userMenuSessionLabel="La sesion expira en 14:32"
+              userActions={[
+                { type: "label", id: "account", label: "Cuenta" },
+                { id: "profile", label: "Ver perfil", icon: "person" },
+                { id: "settings", label: "Preferencias", icon: "settings" },
+                { id: "password", label: "Cambiar contraseña", icon: "lock" },
+                { type: "separator", id: "separator" },
+                {
+                  id: "logout",
+                  label: "Cerrar sesion",
+                  icon: "logout",
+                  tone: "danger",
+                },
+              ]}
             />
 
             <Sidebar
@@ -313,6 +441,10 @@ export default component$(() => {
                 name: "Mac Segovia",
                 initials: "MS",
               }}
+              userActions={[
+                { id: "profile", label: "Ver perfil", icon: "person" },
+                { id: "logout", label: "Cerrar sesion", icon: "logout", tone: "danger" },
+              ]}
             />
           </div>
         </Panel>

@@ -208,6 +208,15 @@ export const componentRegistry = [
     docsPath: "src/ui/composed/FileUpload/file-upload.usage.md",
   },
   {
+    id: "user-menu",
+    name: "UserMenu",
+    category: "composed",
+    status: "ready",
+    description: "Menu de usuario con avatar, rol, sesion y acciones.",
+    importPath: "~/ui",
+    docsPath: "src/ui/composed/UserMenu/user-menu.usage.md",
+  },
+  {
     id: "breadcrumbs",
     name: "Breadcrumbs",
     category: "pattern",

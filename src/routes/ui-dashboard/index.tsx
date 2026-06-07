@@ -149,7 +149,22 @@ export default component$(() => {
             role: "Administrador",
             initials: "MS",
             status: "Sesion protegida",
+            meta: "Ultimo acceso: hoy 09:48",
           }}
+          userMenuSessionLabel="La sesion expira en 14:32"
+          userActions={[
+            { type: "label", id: "account", label: "Cuenta" },
+            { id: "profile", label: "Ver perfil", icon: "person" },
+            { id: "preferences", label: "Preferencias", icon: "settings" },
+            { id: "password", label: "Cambiar contraseña", icon: "lock" },
+            { type: "separator", id: "separator" },
+            {
+              id: "logout",
+              label: "Cerrar sesion",
+              icon: "logout",
+              tone: "danger",
+            },
+          ]}
         />
 
         <Button q:slot="actions" iconLeft="add">

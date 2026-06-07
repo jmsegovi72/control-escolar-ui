@@ -9,6 +9,7 @@ export { Skeleton } from "./composed/Skeleton/Skeleton";
 export { Tabs } from "./composed/Tabs/Tabs";
 export { Toast } from "./composed/Toast/Toast";
 export { Tooltip } from "./composed/Tooltip/Tooltip";
+export { UserMenu } from "./composed/UserMenu/UserMenu";
 export { Badge } from "./primitives/Badge/Badge";
 export { Button } from "./primitives/Button/Button";
 export { Checkbox } from "./primitives/Checkbox/Checkbox";

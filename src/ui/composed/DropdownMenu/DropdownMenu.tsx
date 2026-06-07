@@ -1,4 +1,4 @@
-import { component$, useSignal } from "@builder.io/qwik";
+import { $, component$, useSignal } from "@builder.io/qwik";
 
 import { AppIcon } from "~/ui/icons";
 import type { DropdownMenuProps } from "./dropdown-menu.types";
@@ -7,13 +7,29 @@ import "./dropdown-menu.css";
 export const DropdownMenu = component$<DropdownMenuProps>(
   ({ label, items, icon, align = "end", size = "md", disabled }) => {
     const isOpen = useSignal(false);
+    const menuRef = useSignal<HTMLElement>();
 
     return (
       <div
+        ref={menuRef}
         class="ui-dropdown-menu"
         data-align={align}
         data-size={size}
         data-open={isOpen.value ? "true" : undefined}
+        document:onClick$={$((event) => {
+          const target = event.target as HTMLElement;
+
+          if (menuRef.value?.contains(target)) {
+            return;
+          }
+
+          isOpen.value = false;
+        })}
+        document:onKeydown$={$((event) => {
+          if ((event as KeyboardEvent).key === "Escape") {
+            isOpen.value = false;
+          }
+        })}
       >
         <button
           class="ui-dropdown-menu__trigger"
