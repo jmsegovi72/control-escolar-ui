@@ -35,6 +35,8 @@ import {
   Toast,
   Tooltip,
   Toolbar,
+  componentCategories,
+  componentRegistry,
 } from "~/ui";
 
 type StudentPreview = {
@@ -69,6 +71,14 @@ const studentRows: StudentPreview[] = [
   },
 ];
 
+const registryGroups = Object.entries(componentCategories).map(
+  ([category, label]) => ({
+    category,
+    label,
+    items: componentRegistry.filter((item) => item.category === category),
+  }),
+);
+
 export default component$(() => {
   return (
     <main class="app-frame">
@@ -79,6 +89,64 @@ export default component$(() => {
           Esta ruta es nuestro taller: aqui revisamos estados, tamanos,
           respiracion y consistencia antes de usar piezas en modulos reales.
         </p>
+
+        <Panel eyebrow="Catalogo" title="Registro de componentes">
+          <div class="stack">
+            <div class="showcase-grid">
+              {registryGroups.map((group) => (
+                <StatCard
+                  key={group.category}
+                  label={group.label}
+                  value={group.items.length}
+                  description="componentes listos"
+                  icon={
+                    group.category === "primitive"
+                      ? "settings"
+                      : group.category === "composed"
+                        ? "group"
+                        : "dashboard"
+                  }
+                  tone={
+                    group.category === "primitive"
+                      ? "info"
+                      : group.category === "composed"
+                        ? "primary"
+                        : "success"
+                  }
+                />
+              ))}
+            </div>
+
+            <div class="registry-list">
+              {registryGroups.map((group) => (
+                <section class="registry-group" key={group.category}>
+                  <header class="registry-group__header">
+                    <h2>{group.label}</h2>
+                    <Badge tone="info" size="sm">
+                      {group.items.length} listos
+                    </Badge>
+                  </header>
+
+                  <div class="registry-group__items">
+                    {group.items.map((item) => (
+                      <article class="registry-item" key={item.id}>
+                        <div class="registry-item__main">
+                          <strong>{item.name}</strong>
+                          <span>{item.description}</span>
+                        </div>
+                        <Badge tone="success" size="sm">
+                          {item.status}
+                        </Badge>
+                        <code>{item.importPath}</code>
+                        {item.docsPath && <small>{item.docsPath}</small>}
+                      </article>
+                    ))}
+                  </div>
+                </section>
+              ))}
+            </div>
+          </div>
+        </Panel>
 
         <PageHeader
           eyebrow="Revision actual"

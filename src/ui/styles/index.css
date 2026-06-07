@@ -65,6 +65,91 @@ body {
   gap: var(--space-3);
 }
 
+.registry-list {
+  display: grid;
+  gap: var(--space-5);
+  margin-top: var(--space-4);
+}
+
+.registry-group {
+  display: grid;
+  gap: var(--space-3);
+  min-width: 0;
+}
+
+.registry-group__header {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  align-items: center;
+  justify-content: space-between;
+}
+
+.registry-group__header h2 {
+  margin: 0;
+  color: var(--color-text);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-tight);
+}
+
+.registry-group__items {
+  display: grid;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-3);
+  background: var(--color-surface);
+}
+
+.registry-item {
+  display: grid;
+  grid-template-columns: minmax(14rem, 1fr) auto minmax(5rem, auto) minmax(16rem, 1fr);
+  gap: var(--space-3);
+  align-items: center;
+  min-width: 0;
+  padding: var(--space-3) var(--space-4);
+}
+
+.registry-item + .registry-item {
+  border-top: 1px solid var(--color-border);
+}
+
+.registry-item__main {
+  display: grid;
+  min-width: 0;
+  gap: var(--space-1);
+}
+
+.registry-item__main strong,
+.registry-item__main span,
+.registry-item code,
+.registry-item small {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.registry-item__main strong {
+  color: var(--color-text);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+}
+
+.registry-item__main span,
+.registry-item small {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-xs);
+}
+
+.registry-item code {
+  border-radius: var(--radius-1);
+  background: var(--color-muted);
+  color: var(--color-text-soft);
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  padding: 0.2rem 0.35rem;
+}
+
 @media (max-width: 760px) {
   .app-frame {
     padding: var(--space-4);
@@ -72,5 +157,10 @@ body {
 
   .showcase-grid {
     grid-template-columns: 1fr;
+  }
+
+  .registry-item {
+    grid-template-columns: 1fr;
+    align-items: start;
   }
 }

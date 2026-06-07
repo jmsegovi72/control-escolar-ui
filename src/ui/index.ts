@@ -30,3 +30,9 @@ export { AppShell } from "./patterns/AppShell/AppShell";
 export { StatCard } from "./patterns/StatCard/StatCard";
 export { Stepper } from "./patterns/Stepper/Stepper";
 export { Toolbar } from "./patterns/Toolbar/Toolbar";
+export { componentCategories, componentRegistry } from "./registry";
+export type {
+  ComponentCategory,
+  ComponentRegistryItem,
+  ComponentStatus,
+} from "./registry";
