@@ -1,0 +1,46 @@
+.ui-accordion {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-2);
+  background: var(--color-surface);
+}
+
+.ui-accordion__summary {
+  display: flex;
+  min-height: 3rem;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  cursor: pointer;
+  font-weight: 680;
+  list-style: none;
+  padding: 0 var(--space-4);
+}
+
+.ui-accordion__summary::-webkit-details-marker {
+  display: none;
+}
+
+.ui-accordion__summary:focus-visible {
+  box-shadow: var(--focus-ring);
+  outline: 0;
+}
+
+.ui-accordion__marker {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-right: 2px solid var(--color-text-muted);
+  border-bottom: 2px solid var(--color-text-muted);
+  transform: rotate(45deg) translateY(-2px);
+  transition: transform var(--duration-base) var(--ease-out);
+}
+
+.ui-accordion[open] .ui-accordion__marker {
+  transform: rotate(225deg) translateY(-2px);
+}
+
+.ui-accordion__content {
+  border-top: 1px solid var(--color-border);
+  color: var(--color-text-soft);
+  line-height: 1.6;
+  padding: var(--space-4);
+}
