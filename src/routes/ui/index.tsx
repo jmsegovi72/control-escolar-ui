@@ -32,6 +32,7 @@ import {
   Skeleton,
   StatCard,
   Stepper,
+  SystemHealth,
   Tabs,
   Textarea,
   Toast,
@@ -147,6 +148,89 @@ export default component$(() => {
                   </div>
                 </section>
               ))}
+            </div>
+          </div>
+        </Panel>
+
+        <PageHeader
+          eyebrow="Revision actual"
+          title="SystemHealth"
+          description="Semaforos reutilizables para API, base de datos, sesion, trabajos por lote y sincronizacion."
+          meta="Composed"
+        />
+
+        <Panel eyebrow="Revision actual" title="SystemHealth: estado operativo">
+          <div class="stack">
+            <SystemHealth
+              description="Estado resumido para que el capturista sepa si puede trabajar con confianza."
+              items={[
+                {
+                  id: "api",
+                  label: "API",
+                  value: "Activa",
+                  description: "Respuesta estable",
+                  tone: "online",
+                },
+                {
+                  id: "db",
+                  label: "Base de datos",
+                  value: "36 ms",
+                  description: "Conexion saludable",
+                  tone: "online",
+                },
+                {
+                  id: "jobs",
+                  label: "Lotes",
+                  value: "2 pendientes",
+                  description: "CSV esperando validacion",
+                  tone: "warning",
+                },
+                {
+                  id: "session",
+                  label: "Sesion",
+                  value: "14:32",
+                  description: "Tiempo restante",
+                  tone: "warning",
+                  icon: "lock",
+                },
+              ]}
+            />
+
+            <div class="showcase-grid">
+              <SystemHealth
+                orientation="vertical"
+                title="Modo vertical"
+                items={[
+                  {
+                    id: "sync",
+                    label: "Sincronizacion",
+                    value: "Completa",
+                    tone: "online",
+                  },
+                  {
+                    id: "backend",
+                    label: "Backend",
+                    value: "Lento",
+                    tone: "warning",
+                  },
+                  {
+                    id: "reports",
+                    label: "Reportes",
+                    value: "Sin servicio",
+                    tone: "offline",
+                  },
+                ]}
+              />
+
+              <SystemHealth
+                compact
+                size="sm"
+                items={[
+                  { id: "api", label: "API", value: "OK", tone: "online" },
+                  { id: "db", label: "BD", value: "36 ms", tone: "online" },
+                  { id: "jobs", label: "Lotes", value: "2", tone: "warning" },
+                ]}
+              />
             </div>
           </div>
         </Panel>

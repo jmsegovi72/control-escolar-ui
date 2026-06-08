@@ -235,6 +235,15 @@ export const componentRegistry = [
     docsPath: "src/ui/composed/DetailDrawer/detail-drawer.usage.md",
   },
   {
+    id: "system-health",
+    name: "SystemHealth",
+    category: "composed",
+    status: "ready",
+    description: "Grupo de semaforos para API, BD, sesion y procesos.",
+    importPath: "~/ui",
+    docsPath: "src/ui/composed/SystemHealth/system-health.usage.md",
+  },
+  {
     id: "breadcrumbs",
     name: "Breadcrumbs",
     category: "pattern",

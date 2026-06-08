@@ -18,6 +18,7 @@ import {
   Select,
   Sidebar,
   StatCard,
+  SystemHealth,
   Toast,
   Toolbar,
 } from "~/ui";
@@ -291,6 +292,17 @@ export default component$(() => {
             actionLabel="Ver lotes"
             progress={68}
             dismissible
+          />
+
+          <SystemHealth
+            compact
+            size="sm"
+            items={[
+              { id: "api", label: "API", value: "Activa", tone: "online" },
+              { id: "db", label: "BD", value: "36 ms", tone: "online" },
+              { id: "jobs", label: "Lotes", value: "2", tone: "warning" },
+              { id: "session", label: "Sesion", value: "14:32", tone: "warning" },
+            ]}
           />
 
           <DataTable

@@ -8,6 +8,7 @@ export { FileUpload } from "./composed/FileUpload/FileUpload";
 export { NotificationCenter } from "./composed/NotificationCenter/NotificationCenter";
 export { SearchSelect } from "./composed/SearchSelect/SearchSelect";
 export { Skeleton } from "./composed/Skeleton/Skeleton";
+export { StatusIndicator, SystemHealth } from "./composed/SystemHealth/SystemHealth";
 export { Tabs } from "./composed/Tabs/Tabs";
 export { Toast } from "./composed/Toast/Toast";
 export { Tooltip } from "./composed/Tooltip/Tooltip";
