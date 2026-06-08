@@ -1,6 +1,6 @@
 {
-  "name": "control-escolar-v1",
-  "description": "Interfaz visual para un sistema de control escolar",
+  "name": "control-escolar-ui",
+  "description": "Almacen de componentes UI para Control Escolar",
   "engines": {
     "node": "^18.17.0 || ^20.3.0 || >=21.0.0"
   },
