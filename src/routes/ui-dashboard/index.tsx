@@ -8,6 +8,7 @@ import {
   Button,
   DataTable,
   DateRangeInput,
+  DetailDrawer,
   DropdownMenu,
   EmptyState,
   FileUpload,
@@ -424,6 +425,52 @@ export default component$(() => {
               </div>
             </Panel>
           </div>
+
+          <DetailDrawer
+            open
+            presentation="inline"
+            size="lg"
+            title="Daniela Ruiz Perez"
+            description="Vista de detalle para una fila seleccionada de la tabla."
+            meta="Expediente CE-2026-001"
+            icon="student"
+            tone="info"
+          >
+            <Button q:slot="actions" size="sm" variant="ghost" iconLeft="edit">
+              Editar
+            </Button>
+
+            <div class="showcase-grid">
+              <StatCard
+                label="Grupo"
+                value="1A"
+                description="Turno matutino"
+                icon="group"
+                tone="info"
+              />
+              <StatCard
+                label="Documentos"
+                value="Completo"
+                description="Sin pendientes"
+                icon="success"
+                tone="success"
+              />
+              <StatCard
+                label="Login"
+                value="Activo"
+                description="Sesion protegida"
+                icon="lock"
+                tone="success"
+              />
+            </div>
+
+            <Button q:slot="footer" variant="secondary">
+              Cerrar
+            </Button>
+            <Button q:slot="footer" iconLeft="save">
+              Guardar
+            </Button>
+          </DetailDrawer>
         </div>
       </AppShell>
     </main>

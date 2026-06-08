@@ -29,6 +29,7 @@ export type NotificationCenterProps = {
   align?: NotificationCenterAlign;
   size?: NotificationCenterSize;
   maxItems?: number;
+  unreadCount?: number;
   disabled?: boolean;
   onMarkAllRead$?: QRL<() => void>;
 };

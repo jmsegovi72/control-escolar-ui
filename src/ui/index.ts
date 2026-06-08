@@ -1,6 +1,7 @@
 export { Accordion } from "./composed/Accordion/Accordion";
 export { Dialog } from "./composed/Dialog/Dialog";
 export { DateRangeInput } from "./composed/DateRangeInput/DateRangeInput";
+export { DetailDrawer } from "./composed/DetailDrawer/DetailDrawer";
 export { DropdownMenu } from "./composed/DropdownMenu/DropdownMenu";
 export { EmptyState } from "./composed/EmptyState/EmptyState";
 export { FileUpload } from "./composed/FileUpload/FileUpload";

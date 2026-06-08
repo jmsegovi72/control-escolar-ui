@@ -26,12 +26,13 @@ export const NotificationCenter = component$<NotificationCenterProps>(
     align = "end",
     size = "md",
     maxItems,
+    unreadCount: unreadCountProp,
     disabled,
     onMarkAllRead$,
   }) => {
     const isOpen = useSignal(false);
     const centerRef = useSignal<HTMLElement>();
-    const unreadCount = items.filter((item) => item.unread).length;
+    const unreadCount = unreadCountProp ?? items.filter((item) => item.unread).length;
     const visibleItems = maxItems ? items.slice(0, maxItems) : items;
 
     return (

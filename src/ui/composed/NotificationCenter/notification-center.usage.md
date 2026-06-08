@@ -16,6 +16,7 @@ Centro de avisos para alertas acumuladas del sistema.
 - `align`: `start` o `end`.
 - `size`: `sm` o `md`.
 - `maxItems`: limita la lista visible.
+- `unreadCount`: contador total de no leidas, util si la lista visible esta limitada.
 - `onMarkAllRead$`: accion para marcar todo como leido.
 
 ## Criterio

@@ -14,6 +14,7 @@ import {
   DataTable,
   DateInput,
   DateRangeInput,
+  DetailDrawer,
   Dialog,
   DropdownMenu,
   EmptyState,
@@ -152,6 +153,77 @@ export default component$(() => {
 
         <PageHeader
           eyebrow="Revision actual"
+          title="DetailDrawer"
+          description="Panel lateral para ver o editar un registro desde una tabla sin perder el contexto de la pantalla."
+          meta="Composed"
+        />
+
+        <DetailDrawer
+          open
+          presentation="inline"
+          title="Daniela Ruiz Perez"
+          description="Expediente CE-2026-001 con datos principales, estado documental y acciones rapidas."
+          meta="Alumno activo"
+          icon="student"
+          tone="info"
+        >
+          <Button q:slot="actions" size="sm" variant="ghost" iconLeft="edit">
+            Editar
+          </Button>
+
+          <div class="stack">
+            <div class="showcase-grid">
+              <StatCard
+                label="Grupo"
+                value="1A"
+                description="Turno matutino"
+                icon="group"
+                tone="info"
+              />
+              <StatCard
+                label="Documentos"
+                value="Completo"
+                description="Sin pendientes"
+                icon="success"
+                tone="success"
+              />
+            </div>
+
+            <Panel
+              eyebrow="Datos"
+              title="Informacion principal"
+              variant="subtle"
+              density="compact"
+            >
+              <div class="stack">
+                <Field label="Nombre completo">
+                  <Input value="Daniela Ruiz Perez" variant="line" readOnly />
+                </Field>
+                <Field label="Matricula">
+                  <Input value="CE-2026-001" variant="line" readOnly />
+                </Field>
+                <Field label="Correo institucional">
+                  <Input
+                    value="daniela.ruiz@escuela.edu"
+                    variant="line"
+                    iconLeft="mail"
+                    readOnly
+                  />
+                </Field>
+              </div>
+            </Panel>
+          </div>
+
+          <Button q:slot="footer" variant="secondary">
+            Cancelar
+          </Button>
+          <Button q:slot="footer" iconLeft="save">
+            Guardar cambios
+          </Button>
+        </DetailDrawer>
+
+        <PageHeader
+          eyebrow="Revision actual"
           title="NotificationCenter"
           description="Centro de avisos con contador, lista de eventos, estados no leidos y acciones por notificacion."
           meta="Composed"
@@ -161,6 +233,7 @@ export default component$(() => {
           <div class="stack">
             <div class="inline-stack">
               <NotificationCenter
+                unreadCount={12}
                 items={[
                   {
                     id: "session",
@@ -207,6 +280,7 @@ export default component$(() => {
                 align="start"
                 title="Avisos compactos"
                 maxItems={2}
+                unreadCount={22}
                 items={[
                   {
                     id: "db",

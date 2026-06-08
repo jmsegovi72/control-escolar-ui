@@ -47,16 +47,23 @@
   position: absolute;
   top: -0.35rem;
   right: -0.35rem;
-  min-width: 1.15rem;
+  display: inline-flex;
+  box-sizing: border-box;
+  width: 1.45rem;
+  height: 1.45rem;
+  align-items: center;
+  justify-content: center;
   border: 2px solid var(--color-surface);
   border-radius: var(--radius-round);
   background: var(--color-danger);
-  color: var(--color-on-primary);
-  font-size: var(--font-size-2xs);
-  font-weight: var(--font-weight-bold);
+  color: var(--color-inverse);
+  font-size: 0.6rem;
+  font-variant-numeric: tabular-nums;
+  font-weight: var(--font-weight-regular);
   line-height: 1;
-  padding: 0.2rem 0.35rem;
+  padding: 0;
   text-align: center;
+  white-space: nowrap;
 }
 
 .ui-notification-center__panel {

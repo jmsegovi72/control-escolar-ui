@@ -226,6 +226,15 @@ export const componentRegistry = [
     docsPath: "src/ui/composed/NotificationCenter/notification-center.usage.md",
   },
   {
+    id: "detail-drawer",
+    name: "DetailDrawer",
+    category: "composed",
+    status: "ready",
+    description: "Panel lateral para detalle o edicion sin perder contexto.",
+    importPath: "~/ui",
+    docsPath: "src/ui/composed/DetailDrawer/detail-drawer.usage.md",
+  },
+  {
     id: "breadcrumbs",
     name: "Breadcrumbs",
     category: "pattern",
