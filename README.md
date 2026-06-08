@@ -22,6 +22,8 @@ Este proyecto no es la app final. Es la biblioteca donde disenamos, probamos y d
 
 Mas detalle en [docs/workflow.md](docs/workflow.md).
 
+Inventario de componentes listos en [docs/inventory.md](docs/inventory.md).
+
 ## Organizacion
 
 ```txt
