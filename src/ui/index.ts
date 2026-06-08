@@ -4,6 +4,7 @@ export { DateRangeInput } from "./composed/DateRangeInput/DateRangeInput";
 export { DropdownMenu } from "./composed/DropdownMenu/DropdownMenu";
 export { EmptyState } from "./composed/EmptyState/EmptyState";
 export { FileUpload } from "./composed/FileUpload/FileUpload";
+export { NotificationCenter } from "./composed/NotificationCenter/NotificationCenter";
 export { SearchSelect } from "./composed/SearchSelect/SearchSelect";
 export { Skeleton } from "./composed/Skeleton/Skeleton";
 export { Tabs } from "./composed/Tabs/Tabs";

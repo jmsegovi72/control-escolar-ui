@@ -21,6 +21,7 @@ import {
   Field,
   IconButton,
   Input,
+  NotificationCenter,
   Panel,
   PageHeader,
   RadioGroup,
@@ -145,6 +146,92 @@ export default component$(() => {
                   </div>
                 </section>
               ))}
+            </div>
+          </div>
+        </Panel>
+
+        <PageHeader
+          eyebrow="Revision actual"
+          title="NotificationCenter"
+          description="Centro de avisos con contador, lista de eventos, estados no leidos y acciones por notificacion."
+          meta="Composed"
+        />
+
+        <Panel eyebrow="Revision actual" title="NotificationCenter: avisos del sistema">
+          <div class="stack">
+            <div class="inline-stack">
+              <NotificationCenter
+                items={[
+                  {
+                    id: "session",
+                    title: "Sesion por expirar",
+                    description: "Quedan 14 minutos antes de cerrar la sesion.",
+                    tone: "warning",
+                    icon: "lock",
+                    time: "Hace 2 min",
+                    unread: true,
+                    actionLabel: "Renovar",
+                  },
+                  {
+                    id: "csv",
+                    title: "CSV validado",
+                    description: "128 alumnos listos para importar.",
+                    tone: "success",
+                    icon: "upload",
+                    time: "Hace 8 min",
+                    unread: true,
+                    actionLabel: "Ver lote",
+                  },
+                  {
+                    id: "documents",
+                    title: "Documentos pendientes",
+                    description: "42 expedientes requieren revision.",
+                    tone: "info",
+                    icon: "warning",
+                    time: "Hoy 09:20",
+                  },
+                  {
+                    id: "backend",
+                    title: "Backend lento",
+                    description: "La API respondio en 1.8 segundos.",
+                    tone: "danger",
+                    icon: "warning",
+                    time: "Ayer 18:10",
+                    actionLabel: "Diagnostico",
+                  },
+                ]}
+              />
+
+              <NotificationCenter
+                size="sm"
+                align="start"
+                title="Avisos compactos"
+                maxItems={2}
+                items={[
+                  {
+                    id: "db",
+                    title: "BD activa",
+                    description: "36 ms de respuesta.",
+                    tone: "success",
+                    time: "Ahora",
+                  },
+                  {
+                    id: "jobs",
+                    title: "Lotes pendientes",
+                    description: "2 archivos esperan validacion.",
+                    tone: "warning",
+                    unread: true,
+                    time: "Ahora",
+                  },
+                ]}
+              />
+
+              <NotificationCenter
+                title="Sin avisos"
+                items={[]}
+                emptyTitle="Todo revisado"
+                emptyDescription="No hay alertas activas en este momento."
+              />
             </div>
           </div>
         </Panel>

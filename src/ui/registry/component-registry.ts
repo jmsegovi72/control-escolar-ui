@@ -217,6 +217,15 @@ export const componentRegistry = [
     docsPath: "src/ui/composed/UserMenu/user-menu.usage.md",
   },
   {
+    id: "notification-center",
+    name: "NotificationCenter",
+    category: "composed",
+    status: "ready",
+    description: "Centro de avisos con contador, estados y acciones.",
+    importPath: "~/ui",
+    docsPath: "src/ui/composed/NotificationCenter/notification-center.usage.md",
+  },
+  {
     id: "breadcrumbs",
     name: "Breadcrumbs",
     category: "pattern",

@@ -20,6 +20,7 @@ export type IconIntent =
   | "login-reset"
   | "logout"
   | "mail"
+  | "notifications"
   | "person"
   | "phone"
   | "pin"

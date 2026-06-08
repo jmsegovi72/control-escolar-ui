@@ -12,6 +12,7 @@ import {
   EmptyState,
   FileUpload,
   Input,
+  NotificationCenter,
   Panel,
   Select,
   Sidebar,
@@ -170,6 +171,39 @@ export default component$(() => {
         <Button q:slot="actions" iconLeft="add">
           Nuevo alumno
         </Button>
+        <NotificationCenter
+          q:slot="actions"
+          items={[
+            {
+              id: "session",
+              title: "Sesion por expirar",
+              description: "Quedan 14 minutos antes de cerrar la sesion.",
+              tone: "warning",
+              icon: "lock",
+              time: "Hace 2 min",
+              unread: true,
+              actionLabel: "Renovar",
+            },
+            {
+              id: "csv",
+              title: "CSV validado",
+              description: "128 alumnos listos para importar.",
+              tone: "success",
+              icon: "upload",
+              time: "Hace 8 min",
+              unread: true,
+              actionLabel: "Ver lote",
+            },
+            {
+              id: "documents",
+              title: "Documentos pendientes",
+              description: "42 expedientes requieren revision.",
+              tone: "info",
+              icon: "warning",
+              time: "Hoy 09:20",
+            },
+          ]}
+        />
         <DropdownMenu
           q:slot="actions"
           label="Mas"

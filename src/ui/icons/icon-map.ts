@@ -2,6 +2,7 @@ import {
   IconAlertTriangle,
   IconArrowLeft,
   IconBarChart,
+  IconBell,
   IconBook,
   IconBriefcase,
   IconCalendar,
@@ -96,6 +97,7 @@ export const iconMap: Record<IconIntent, IconDefinition> = {
   "login-reset": { default: IconRefresh },
   logout: { default: IconLogOut },
   mail: { default: IconMail },
+  notifications: { default: IconBell },
   person: {
     default: IconUser,
     contexts: {
