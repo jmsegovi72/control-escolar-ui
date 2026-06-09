@@ -1,4 +1,4 @@
-import { component$ } from "@builder.io/qwik";
+import { component$, $ } from "@builder.io/qwik";
 import type { DocumentHead } from "@builder.io/qwik-city";
 
 import { AppIcon } from "~/ui/icons";
@@ -25,6 +25,7 @@ import {
   NotificationCenter,
   Panel,
   PageHeader,
+  PageReturn,
   RadioGroup,
   SearchSelect,
   Select,
@@ -149,6 +150,31 @@ export default component$(() => {
                 </section>
               ))}
             </div>
+          </div>
+        </Panel>
+
+        <PageHeader
+          eyebrow="Revisión actual"
+          title="PageReturn"
+          description="Barra de navegación superior con botón regresar y título de módulo."
+          meta="Composed"
+        />
+
+        <Panel eyebrow="Revisión actual" title="PageReturn: barra de retorno">
+          <div class="stack">
+            <PageReturn
+              eyebrow="MÓDULO DE USUARIOS"
+              title="Detalle de usuario"
+              buttonLabel="Regresar"
+              onClick$={$(() => alert("Regresar cliqueado (Módulo de usuarios)"))}
+            />
+
+            <PageReturn
+              eyebrow="MÓDULO DE ALUMNOS"
+              title="Nuevo alumno"
+              buttonLabel="Volver al listado"
+              onClick$={$(() => alert("Volver al listado cliqueado (Módulo de alumnos)"))}
+            />
           </div>
         </Panel>
 
